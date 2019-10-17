@@ -16,6 +16,7 @@
                     <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
                     <p class="top-menu">Hello {{ user.username }} <small><a href="{% url 'logout' %}"><small style="font-size:smaller">Log out</small></a></small></p>
                 {% else %}
+                    <a href="{% url 'register' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span></a>
                     <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
                 {% endif %}
                 <h1><a href="/">Swapnil's Blog</a></h1>
@@ -24,6 +25,11 @@
             <div class="content container">
                 <div class="row">
                     <div class="col-md-8">
+                    {% if messages %}
+                        {% for message in messages%}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
                     {% block content %}
                     {% endblock %}
                     </div>
